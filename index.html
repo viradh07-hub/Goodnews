@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoodNews | Premium Editorial Feed</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
         /* FLIPBOARD PREMIUM DARK THEME ACCENTS */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
@@ -111,7 +110,7 @@
         .post-card { 
             background: #121415; 
             border: 1px solid rgba(255, 255, 255, 0.05); 
-            border-radius: 0; /* Sharp, sleek modern lines */
+            border-radius: 0; 
             overflow: hidden; 
             display: flex; 
             flex-direction: column; 
@@ -134,7 +133,7 @@
             font-size: 11px; 
             font-weight: 800; 
             text-transform: uppercase; 
-            color: #f02828; /* Sharp Red Accent */
+            color: #f02828; 
             letter-spacing: 1px;
         }
         .card-date { 
@@ -145,4 +144,249 @@
         
         .image-container { 
             position: relative; 
-            width: 100
+            width: 100%; 
+            aspect-ratio: 16 / 10; 
+            overflow: hidden; 
+            background: #17191a; 
+        }
+        .image-container img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.5s ease;
+        }
+        .post-card:hover .image-container img {
+            transform: scale(1.05);
+        }
+        
+        .news-context { 
+            padding: 20px; 
+            font-size: 14px; 
+            line-height: 1.6; 
+            color: #e1e3e6; 
+            font-weight: 400;
+            display: -webkit-box; 
+            -webkit-line-clamp: 4; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden; 
+        }
+
+        /* PREMIUM CONTROLS LAYOUT */
+        .action-bar { 
+            padding: 16px 20px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .reactions { 
+            display: flex; 
+            gap: 6px; 
+            flex-wrap: wrap; 
+        }
+        .reaction-btn { 
+            background: #17191a; 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            padding: 6px 12px; 
+            border-radius: 4px; 
+            font-size: 12px; 
+            color: #a0a5aa;
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+            transition: all 0.2s;
+        }
+        .reaction-btn:hover {
+            background: #1f2224;
+            color: #fff;
+        }
+        .reaction-btn.selected { 
+            background: rgba(240, 40, 40, 0.15); 
+            border-color: #f02828; 
+            color: #ffffff;
+        }
+        
+        .share-whatsapp { 
+            background: #1ebe57; 
+            color: white; 
+            border: none; 
+            padding: 8px 12px; 
+            border-radius: 4px; 
+            font-size: 12px; 
+            font-weight: 700; 
+            text-decoration: none; 
+            text-align: center; 
+            display: block; 
+            width: 100%; 
+            letter-spacing: 0.5px;
+            transition: background 0.2s;
+        }
+        .share-whatsapp:hover { background: #1aa64b; }
+
+        .comment-trigger { 
+            padding: 12px 20px; 
+            border-top: 1px solid rgba(255, 255, 255, 0.03); 
+            font-size: 12px; 
+            color: #70757a; 
+            cursor: pointer; 
+            font-weight: 600; 
+            text-align: center; 
+            background: #111214; 
+            transition: color 0.2s;
+        }
+        .comment-trigger:hover { color: #ffffff; }
+        .comment-drawer { display: none; padding: 16px; border-top: 1px solid rgba(255, 255, 255, 0.03); background: #0e0f10; font-size: 12px; }
+
+        /* NATIVE STYLED AD DESIGN */
+        .inline-ad-space { 
+            background: #121415; 
+            border: 1px dashed rgba(255, 255, 255, 0.15); 
+            padding: 24px; 
+            text-align: center; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            aspect-ratio: 16 / 13;
+        }
+
+        #loader { grid-column: 1 / -1; text-align: center; padding: 80px; font-size: 14px; color: #a0a5aa; font-weight: 600; letter-spacing: 1px; }
+
+        @media (max-width: 1200px) { .feed-container { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+        @media (max-width: 900px) { .feed-container { grid-template-columns: repeat(2, 1fr); padding: 0 16px; } .category-wrapper { padding: 0 16px; } }
+        @media (max-width: 576px) { .feed-container { grid-template-columns: repeat(1, 1fr); gap: 20px; } header { padding: 16px; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo"><span>F</span>goodnews</a>
+            <div class="tagline">The Positivity Feed</div>
+        </div>
+    </header>
+
+    <div class="category-wrapper">
+        <div class="category-menu">
+            <button class="filter-btn active" onclick="filterCategory('all')">All Stories</button>
+            <button class="filter-btn" onclick="filterCategory('entertainment')">Entertainment</button>
+            <button class="filter-btn" onclick="filterCategory('lifestyle')">Lifestyle</button>
+            <button class="filter-btn" onclick="filterCategory('sports')">Sports</button>
+            <button class="filter-btn" onclick="filterCategory('international')">International</button>
+            <button class="filter-btn" onclick="filterCategory('offbeat')">Offbeat</button>
+            <button class="filter-btn" onclick="filterCategory('business')">Business</button>
+            <button class="filter-btn" onclick="filterCategory('tech-ai')">Tech & AI</button>
+        </div>
+    </div>
+
+    <div class="feed-container" id="main-timeline-container">
+        <div id="loader">Assembling your magazine feed...</div>
+    </div>
+
+    <script>
+        const DATA_SOURCE = 'feed.json';
+
+        function formatNewsDate(dateString) {
+            if(!dateString) return "Recently";
+            try {
+                const dateObj = new Date(dateString);
+                const options = { month: 'short', day: 'numeric' };
+                const formatted = dateObj.toLocaleDateString('en-US', options);
+                
+                const today = new Date();
+                if(dateObj.toDateString() === today.toDateString()) {
+                    return `Today • ${formatted}`;
+                }
+                return formatted;
+            } catch(e) {
+                return dateString;
+            }
+        }
+
+        async function fetchContentFeed() {
+            try {
+                const response = await fetch(DATA_SOURCE);
+                const data = await response.json();
+                const itemsList = data.posts ? data.posts : data;
+                
+                const container = document.getElementById('main-timeline-container');
+                container.innerHTML = ''; 
+
+                for (let i = itemsList.length - 1; i >= 0; i--) {
+                    const item = itemsList[i];
+                    
+                    if (i % 3 === 0 && i !== itemsList.length - 1) {
+                        const adHTML = `
+                            <div class="inline-ad-space">
+                                <p style="letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; font-size:10px; color:#70757a; font-weight:700;">SPONSORED PLATFORM SLOT</p>
+                                <div style="font-size:12px; color:#50555a; border: 1px dashed rgba(255,255,255,0.05); padding: 24px; width:100%; font-weight:600;">AdSense Native Element</div>
+                            </div>`;
+                        container.innerHTML += adHTML;
+                    }
+
+                    const cardUniqueId = `box-${i}`;
+                    const displayDate = formatNewsDate(item.date);
+                    
+                    const cardHTML = `
+                        <div class="post-card" data-category="${item.category}">
+                            <div class="card-header">
+                                <span class="card-badge">${item.label}</span>
+                                <span class="card-date">${displayDate}</span>
+                            </div>
+                            <div class="image-container"><img src="${item.image}" alt="Editorial Media"></div>
+                            <div class="news-context">${item.text}</div>
+                            <div class="action-bar">
+                                <div class="reactions">
+                                    <button class="reaction-btn" onclick="handleReact(this)">👍 <span>0</span></button>
+                                    <button class="reaction-btn" onclick="handleReact(this)">❤️ <span>0</span></button>
+                                    <button class="reaction-btn" onclick="handleReact(this)">🔥 <span>0</span></button>
+                                </div>
+                                <!-- THE CORRECTED VERCEL LINK IS DETAILED DIRECTLY HERE BELOW -->
+                                <a href="https://api.whatsapp.com/send?text=Check out this update on GoodNews! https://goodnews-xb65-git-main-viradh07-hubs-projects.vercel.app" target="_blank" class="share-whatsapp">Share Story 📲</a>
+                            </div>
+                            <div class="comment-trigger" onclick="toggleComments('${cardUniqueId}')">💬 Inside Discussion</div>
+                            <div class="comment-drawer" id="${cardUniqueId}"><p style="color:#50555a;">[Thread Context Node]</p></div>
+                        </div>`;
+                    
+                    container.innerHTML += cardHTML;
+                }
+            } catch (error) {
+                document.getElementById('loader').innerText = 'Sync your Editorial Desk to publish articles!';
+                console.error(error);
+            }
+        }
+
+        // Rest of layout handlers...
+        function filterCategory(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if(window.event) { window.event.target.classList.add('active'); }
+
+            const cards = document.querySelectorAll('.post-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function handleReact(button) {
+            button.classList.toggle('selected');
+            let countSpan = button.querySelector('span');
+            let currentCount = parseInt(countSpan.innerText);
+            countSpan.innerText = button.classList.contains('selected') ? currentCount + 1 : currentCount - 1;
+        }
+
+        function toggleComments(id) {
+            const drawer = document.getElementById(id);
+            drawer.style.display = drawer.style.display === "block" ? "none" : "block";
+        }
+
+        window.onload = fetchContentFeed;
+    </script>
+</body>
+</html>
