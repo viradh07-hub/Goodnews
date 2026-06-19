@@ -1,0 +1,11 @@
+{
+  "posts": [
+    {
+      "date": "Today • June 19",
+      "category": "tech-ai",
+      "label": "Tech & AI",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600",
+      "text": "Welcome to your clean fresh start! This is your very first live automated news block card component loading perfectly out of your content dashboard."
+    }
+  ]
+}
