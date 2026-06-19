@@ -14,22 +14,21 @@
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
     <script>
-        // Create the real-time card visual component previewer
         const NewsPreview = createClass({
             render: function() {
                 const entry = this.props.entry;
                 const label = entry.getIn(['data', 'label']) || 'CATEGORY BADGE';
                 const text = entry.getIn(['data', 'text']) || 'Type your news content body summary in the editor window box to preview its card text flow...';
                 
-                // CRASH PROTECTION: Safely look up image sources only if media streams are initialized
-                const mediaFiles = this.props.mediaFiles;
+                // Fetch image asset configuration
                 const imageObj = entry.getIn(['data', 'image']);
                 let imageSrc = 'https://placehold.co/400x400/f6f8fa/a0aec0?text=Upload+Image';
                 
                 if (imageObj) {
-                    if (mediaFiles && typeof mediaFiles.find === 'function') {
-                        const mediaFile = mediaFiles.find(file => file.get('path') === imageObj);
-                        imageSrc = mediaFile ? mediaFile.get('url') : imageObj;
+                    // RESOLVE BLOB PATHS: Use getAsset helper to force render local asset memory objects instantly
+                    const asset = this.props.getAsset(imageObj);
+                    if (asset) {
+                        imageSrc = asset.toString();
                     } else {
                         imageSrc = imageObj;
                     }
