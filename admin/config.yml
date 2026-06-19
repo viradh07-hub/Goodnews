@@ -2,7 +2,7 @@ backend:
   name: github
   repo: viradh-07/goodnews
   branch: main
-  base_url: implicit
+  base_url: https://goodnewsadmin.netlify.app
   
 media_folder: "images"
 
