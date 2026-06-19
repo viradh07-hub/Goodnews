@@ -4,8 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoodNews | Content Desk Panel</title>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!-- Netlify Identity UI Bootstrapper Handshake -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+    <!-- Decap CMS Core UI Engine CDN -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+        // Force Decap CMS to point directly to the correct relative configuration track path
+        window.CMS_CONFIG = {
+            config_url: "./config.yml"
+        };
+    </script>
 </body>
 </html>
