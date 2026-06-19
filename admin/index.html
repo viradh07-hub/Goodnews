@@ -8,13 +8,14 @@
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-    <!-- Decap CMS Core UI Engine CDN -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     <script>
-        // Force Decap CMS to point directly to the correct relative configuration track path
+        // STEP 1: Define the target path configuration target BEFORE the engine turns on
         window.CMS_CONFIG = {
             config_url: "./config.yml"
         };
     </script>
+
+    <!-- STEP 2: Now load the Decap CMS Engine, which will read the config defined above -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
