@@ -8,16 +8,16 @@ media_folder: "images"
 public_folder: "images"
 
 collections:
-  - name: "news_feed"
-    label: "Editorial Stream"
-    label_singular: "News Card"
-    folder: "content/posts" # Decap separates layout rendering natively for lists vs creation files
+  - name: "content_repository"
+    label: "Content Repository"
+    label_singular: "News Article"
+    # This folder structure creates the true "Repository vs Add Content" separation
+    folder: "content/posts" 
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    summary: "{{label}} - {{text}}"
+    slug: "{{year}}{{month}}{{day}}-{{slug}}"
+    summary: "{{headline}}" # Makes your repository list clean and readable
     fields:
-      - { label: "System Timestamp", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", date_format: "YYYY-MM-DD", time_format: "HH:mm", required: true }
-      - { label: "Headline / Category Label", name: "label", widget: "string", hint: "e.g., Entertainment, Sports, International" }
-      - { label: "Filter Category Code (lowercase match)", name: "category", widget: "select", options: ["entertainment", "lifestyle", "sports", "international", "offbeat", "business", "tech-ai"] }
-      - { label: "Upload News Card Image", name: "image", widget: "image" }
-      - { label: "News Content Body Summary", name: "text", widget: "text" }
+      # Stripped down to the exact 3 fields requested
+      - { label: "Headline", name: "headline", widget: "string" }
+      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Content Body", name: "body", widget: "text" }
