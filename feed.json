@@ -6,6 +6,13 @@
       "image": "images/boy_and_dog_202604211733.jpeg",
       "category": "entertainment",
       "text": "Testing testing testinTesting testing testinTesting testing testinTesting testing testinTesting testing testinTesting testing testinTesting testing testinTesting testing testinTesting testing testinTesting testing testinTesting testing testinTesting testing testinTesting testing testinTesting testing testinTesting testing testin"
+    },
+    {
+      "date": "2026-06-19T16:03:00+05:30",
+      "category": "lifestyle",
+      "image": "images/gemini_generated_image_fztgn2fztgn2fztg.png",
+      "text": "An urban oasis blooms! A downtown vertical community garden project is thriving, defying the concrete jungle. Local volunteers are harvesting fresh produce daily, providing healthy food options and a splash of vibrant nature to the city center. Residents report improved mood and air quality.",
+      "label": "Urban Greenery Thrives"
     }
   ]
 }
