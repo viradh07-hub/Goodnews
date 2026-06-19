@@ -2,7 +2,6 @@ backend:
   name: github
   repo: viradh-07/goodnews
   branch: main
-  base_url: https://goodnews-xb65-git-main-viradh07-hubs-projects.vercel.app
 
 media_folder: "images"
 public_folder: "images"
@@ -11,13 +10,11 @@ collections:
   - name: "content_repository"
     label: "Content Repository"
     label_singular: "News Article"
-    # This folder structure creates the true "Repository vs Add Content" separation
     folder: "content/posts" 
     create: true
     slug: "{{year}}{{month}}{{day}}-{{slug}}"
-    summary: "{{headline}}" # Makes your repository list clean and readable
+    summary: "{{headline}}"
     fields:
-      # Stripped down to the exact 3 fields requested
       - { label: "Headline", name: "headline", widget: "string" }
       - { label: "Featured Image", name: "image", widget: "image" }
-      - { label: "Content Body", name: "body", widget: "text" }
+      - { label: "Content Body", name: "body", widget: "markdown" }
