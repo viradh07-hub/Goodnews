@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoodNews | Premium Content Desk</title>
     <link rel="cms-config-url" type="text/yaml" href="./config.yml">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Load Google Roboto font to mimic the real live frontend site exactly -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
@@ -14,12 +17,11 @@
             render: function() {
                 const entry = this.props.entry;
                 
-                // Track list parameters inside file block layers dynamically
                 const label = entry.getIn(['data', 'label']) || 'CATEGORY BADGE';
                 const text = entry.getIn(['data', 'text']) || 'Type your news content body summary in the editor window box to preview its card text flow...';
                 
                 const imageObj = entry.getIn(['data', 'image']);
-                let imageSrc = 'https://placehold.co/400x400/f6f8fa/a0aec0?text=Upload+Image';
+                let imageSrc = 'https://placehold.co/400x400/17191a/a0a5aa?text=Upload+Image';
                 
                 if (imageObj) {
                     const asset = this.props.getAsset(imageObj);
@@ -27,23 +29,23 @@
                     else { imageSrc = imageObj; }
                 }
 
-                return h('div', { style: { padding: '24px', background: '#f6f8fa', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' } },
-                    h('div', { style: { background: '#ffffff', border: '1px solid #e1e4e8', borderRadius: '16px', width: '340px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column' } },
-                        h('div', { style: { padding: '12px 16px', display: 'flex', justifyContent: 'between', borderBottom: '1px solid #f1f3f5', alignItems: 'center' } },
-                            h('span', { style: { fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: '#0366d6', background: '#f1f8ff', padding: '3px 8px', borderRadius: '6px' } }, label),
-                            h('span', { style: { fontSize: '11px', color: '#888', fontWeight: '500', marginLeft: 'auto' } }, 'Today • Live Preview')
+                // Mimics your new live Flipboard Magazine Dark Theme layout configuration perfectly
+                return h('div', { style: { padding: '24px', background: '#0b0c0d', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif' } },
+                    h('div', { style: { background: '#121415', border: '1px solid rgba(255,255,255,0.05)', width: '340px', overflow: 'hidden', display: 'flex', flexDirection: 'column' } },
+                        h('div', { style: { padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
+                            h('span', { style: { fontSize: '11px', fontWeight: '800', textTransform: 'uppercase', color: '#f02828', letterSpacing: '1px' } }, label),
+                            h('span', { style: { fontSize: '11px', color: '#70757a', fontWeight: '600' } }, 'Today • Preview')
                         ),
-                        h('div', { style: { width: '100%', aspectRatio: '1/1', overflow: 'hidden', background: '#f6f8fa' } },
+                        h('div', { style: { width: '100%', aspectRatio: '16/10', overflow: 'hidden', background: '#17191a' } },
                             h('img', { src: imageSrc, style: { width: '100%', height: '100%', objectFit: 'cover' } })
                         ),
-                        h('div', { style: { padding: '14px 16px 20px 16px', fontSize: '13.5px', lineHeight: '1.45', color: '#262626' } }, text)
+                        h('div', { style: { padding: '20px', fontSize: '14.5px', lineHeight: '1.6', color: '#e1e3e6', fontFamily: "'Roboto', sans-serif" } }, text)
                     )
                 );
             }
         });
 
-        // Map live template viewer rendering pipeline right to our updated editorial desk
-        CMS.registerPreviewTemplate("news_desk", NewsPreview);
+        CMS.registerPreviewTemplate("news_feed", NewsPreview);
     </script>
 </body>
 </html>
