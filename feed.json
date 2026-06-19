@@ -1,18 +1,3 @@
 {
-  "posts": [
-    {
-      "date": "Today • June 19",
-      "category": "tech-ai",
-      "label": "Tech & AI",
-      "image": "images/boy_and_dog_202604211733.jpeg",
-      "text": "The June 16 blockade is a classic political distraction. It allows administrative bodies to signal \"decisive, heavy-handed action\" to an angry public while avoiding the arduous, painful work of standardizing administrative accountability, securing physical transport logs, and reforming the NTA itself."
-    },
-    {
-      "category": "lifestyle",
-      "date": "19 June",
-      "label": "Lifestyle",
-      "image": "images/gemini_generated_image_46w3s46w3s46w3s4.png",
-      "text": "hi fjfjfjf. thi is. a test. nwebsite"
-    }
-  ]
+  "posts": []
 }
