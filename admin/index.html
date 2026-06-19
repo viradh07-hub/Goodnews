@@ -4,18 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoodNews | Content Desk Panel</title>
-    <!-- Netlify Identity UI Bootstrapper Handshake -->
+    <!-- STEP 1: Tell the browser exactly where config.yml is using a standard relation link tag -->
+    <link rel="cms-config-url" type="text/yaml" href="./config.yml">
+    
+    <!-- STEP 2: Load Netlify Identity Gateway Token Handshake -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-    <script>
-        // STEP 1: Define the target path configuration target BEFORE the engine turns on
-        window.CMS_CONFIG = {
-            config_url: "./config.yml"
-        };
-    </script>
-
-    <!-- STEP 2: Now load the Decap CMS Engine, which will read the config defined above -->
+    <!-- STEP 3: Load the Core UI Engine last -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
